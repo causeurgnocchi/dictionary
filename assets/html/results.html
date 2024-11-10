@@ -1,0 +1,19 @@
+{{define "content"}}
+<div class="results-container">
+    {{range .Results}}
+    <div class="word">
+        <p class="reading">
+            {{range .Characters}}
+            <span>{{.Reading}}</span>
+            {{end}}
+        </p>
+        <p class="writing">{{.Writing}}</p>
+        <ol class="meanings">
+            {{range .Meanings}}
+            <li class="meaning">{{.}}</li>
+            {{end}}    
+        </ol>
+    </div>
+    {{end}}
+</div>
+{{end}}
