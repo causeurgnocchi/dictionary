@@ -81,5 +81,8 @@ func (h ResultsHandler) ServeHTTP(writer http.ResponseWriter, req *http.Request)
 		"attr": func(attr string) template.HTMLAttr { return template.HTMLAttr(attr) },
 	}
     tmpl := template.Must(template.New("").Funcs(funcMap).ParseFiles("assets/html/base.html", "assets/html/results.html"))
-    tmpl.ExecuteTemplate(writer, "base", resultsPageData{Results: results, LastSearch: req.URL.Query().Get("search")})
+    tmpl.ExecuteTemplate(writer, "base", resultsPageData{
+		Results: results,
+		LastSearch: req.URL.Query().Get("search"),
+	})
 }

@@ -46,17 +46,10 @@ body {
     flex-grow: 1;
 }
 
-.reading {
-    display: flex;
-}
-
-.reading > span {
-    display: inline-block;
-    width: 24px;
-    font-size: 12px;
-}
-
 .writing {
-    display: inline-block;
     font-size: 24px;
+}
+
+.reading {
+    font-size: 12px;
 }
