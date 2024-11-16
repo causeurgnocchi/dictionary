@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+:root {
+    --kanji-size: 30px;
+}
+
 body {
     height: 100vh;
     display: grid;
@@ -33,6 +37,7 @@ body {
 
 .search-input {
     border: none;
+    font-size: 15px;
 }
 
 .search-button {
@@ -46,10 +51,50 @@ body {
     flex-grow: 1;
 }
 
-.writing {
-    font-size: 24px;
+.vocabularies {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding: 0 20px 20px;
+}
+
+.reading-writing {
+    display: grid;
+    grid-template-rows: 18px 35px;
 }
 
 .reading {
-    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.reading > span {
+    width: var(--kanji-size);
+    text-align: center;
+    max-height: 18px;
+}
+
+.reading-length-1 {
+    font-size: calc(var(--kanji-size) / 2);
+}
+
+.reading-length-2 {
+    font-size: calc(var(--kanji-size) / 2);
+}
+
+.reading-length-3 {
+    font-size: calc(var(--kanji-size) / 3);
+}
+
+.reading-length-4 {
+    font-size: calc(var(--kanji-size) / 4);
+}
+
+.writing {
+    font-size: var(--kanji-size);
+}
+
+.meanings {
+    padding-inline-start: 30px;
+    padding-top: 15px;
 }

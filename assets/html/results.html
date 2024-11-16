@@ -1,16 +1,20 @@
 {{define "content"}}
-<div class="results-container">
-    {{range .Results}}
+<div class="vocabularies">
+    {{range .Vocabularies}}
     <div class="vocabulary">
-        <p class="reading">
-            {{range .Characters}}
-                <span>{{.Reading}}</span>
-            {{end}}
-        </p>
-        <p class="writing">{{.Writing}}</p>
+        <div class="reading-writing">
+            <p class="reading">
+                {{range .Characters}}
+                    <span {{strlen .Reading | printf `class="reading-length-%d"` | attr}}>{{print .Reading}}</span>
+                {{end}}
+            </p>
+            <p class="writing">
+                {{.Writing}}
+            </p>
+        </div>
         <ol class="meanings">
             {{range .Meanings}}
-            <li class="meaning">{{.}}</li>
+            <li class="meaning"><a href="">{{.}}</a></li>
             {{end}}    
         </ol>
     </div>
