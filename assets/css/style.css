@@ -58,6 +58,21 @@ body {
     padding: 0 20px 20px;
 }
 
+.staging-area {
+    width: 350px;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.staging-area .reading-writing {
+    align-self: center;
+}
+
+.meaning-chosen {
+    text-align: center;
+}
+
 .reading-writing {
     display: grid;
     grid-template-rows: 18px 35px;

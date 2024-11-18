@@ -1,6 +1,26 @@
 {{define "content"}}
 <div class="vocabularies">
-    {{range .Vocabularies}}
+    <div class="staging-area">
+        {{with (index .Vocabularies 0)}}
+        <div class="reading-writing">
+            <p class="reading">
+                {{range .Characters}}
+                    <span {{strlen .Reading | printf `class="reading-length-%d"` | attr}}>{{print .Reading}}</span>
+                {{end}}
+            </p>
+            <p class="writing">
+                {{.Writing}}
+            </p>
+        </div>
+        <p class="meaning-chosen">{{index .Meanings 0}}</p>
+        <ul class="meanings">
+            {{range (slice .Meanings 1)}}
+            <li class="meaning">{{.}}</li>
+            {{end}}    
+        </ul>
+        {{end}}
+    </div>
+    {{range (slice .Vocabularies 1)}}
     <div class="vocabulary">
         <div class="reading-writing">
             <p class="reading">
@@ -12,11 +32,11 @@
                 {{.Writing}}
             </p>
         </div>
-        <ol class="meanings">
+        <ul class="meanings">
             {{range .Meanings}}
-            <li class="meaning"><a href="">{{.}}</a></li>
+            <li class="meaning">{{.}}</li>
             {{end}}    
-        </ol>
+        </ul>
     </div>
     {{end}}
 </div>
