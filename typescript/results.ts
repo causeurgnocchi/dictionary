@@ -13,12 +13,12 @@ function Vocabulary(element: Element) : Vocabulary {
 }
 
 function createStagingElement(vocabulary: Vocabulary, chosenMeaning: string) : HTMLDivElement {
-  const container = document.createElement('div');
-  container.classList.add('staging-area');
+  const stagingElement = document.createElement('div');
+  stagingElement.classList.add('staging-area');
 
   const readingWriting = document.createElement('div');
   readingWriting.classList.add('reading-writing');
-  container.appendChild(readingWriting);
+  stagingElement.appendChild(readingWriting);
 
   const reading = document.createElement('p');
   reading.classList.add('reading');
@@ -38,11 +38,11 @@ function createStagingElement(vocabulary: Vocabulary, chosenMeaning: string) : H
   const chosenMeaningElement = document.createElement('p');
   chosenMeaningElement.classList.add('meaning-chosen');
   chosenMeaningElement.textContent = chosenMeaning;
-  container.appendChild(chosenMeaningElement);
+  stagingElement.appendChild(chosenMeaningElement);
 
   const meanings = document.createElement('ul');
   meanings.classList.add('meanings');
-  container.appendChild(meanings);
+  stagingElement.appendChild(meanings);
 
   vocabulary.meanings.forEach((m) => {
     const meaning = document.createElement('li');
@@ -51,17 +51,17 @@ function createStagingElement(vocabulary: Vocabulary, chosenMeaning: string) : H
     meanings.appendChild(meaning);
   });
 
-  return container;
+  return stagingElement;
 }
 
 
 function createVocabularyElement(vocabulary: Vocabulary, isStagingArea: boolean) : HTMLDivElement {
-  const container = document.createElement('div');
-  container.classList.add(isStagingArea ? 'staging-area' : 'vocabulary');
+  const vocabularyElement = document.createElement('div');
+  vocabularyElement.classList.add(isStagingArea ? 'staging-area' : 'vocabulary');
 
   const readingWriting = document.createElement('div');
   readingWriting.classList.add('reading-writing');
-  container.appendChild(readingWriting);
+  vocabularyElement.appendChild(readingWriting);
 
   const reading = document.createElement('p');
   reading.classList.add('reading');
@@ -80,7 +80,7 @@ function createVocabularyElement(vocabulary: Vocabulary, isStagingArea: boolean)
 
   const meanings = document.createElement('ul');
   meanings.classList.add('meanings');
-  container.appendChild(meanings);
+  vocabularyElement.appendChild(meanings);
 
   vocabulary.meanings.forEach((m) => {
     const meaning = document.createElement('li');
@@ -89,10 +89,10 @@ function createVocabularyElement(vocabulary: Vocabulary, isStagingArea: boolean)
     meanings.appendChild(meaning);
   });
 
-  return container;
+  return vocabularyElement;
 }
 
-let previousVocabulary = Vocabulary(document.querySelector('.staging-area'));
+let previousVocabulary = Vocabulary(document.querySelector('.staging-area')!);
 
 console.log(previousVocabulary);
 
