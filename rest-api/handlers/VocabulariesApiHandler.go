@@ -41,5 +41,5 @@ func (h VocabulariesApiHandler) ServeHTTP(w http.ResponseWriter, r *http.Request
     collector.Visit("https://jisho.org/search/" + r.PathValue("search"))
     
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(vocabularies);
+	json.NewEncoder(w).Encode(scrapeJisho(r.PathValue("search")));
 }
