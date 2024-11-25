@@ -20,6 +20,17 @@ type selector struct{
     Val string
 }
 
+func childText(n *html.Node, s []selector) string {
+	children := filter(n, s)
+	if children == nil {
+		return ""
+	}
+
+
+
+	for a := range children[0].
+}
+
 func filter(n *html.Node, s []selector) []*html.Node {
     filterChildren := func(childSelectors []selector) []*html.Node {
         matches := make([]*html.Node, 0)
