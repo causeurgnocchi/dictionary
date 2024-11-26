@@ -29,10 +29,10 @@ func scrapeJisho(search string) []vocabulary {
     })
 
     for _, v := range(vocabularyElements) {
-        writing := []rune(strings.TrimSpace(filter(v, []selector{
+        writing := []rune(childText(v, []selector{
             {Type: classSelector, Val: "concept_light-representation"},
             {Type: classSelector, Val: "text"},
-        })[0].FirstChild.Data))
+        }))
 
         furigana := make([]string, len(writing))
         furiganaElements := filter(v, []selector{
@@ -40,18 +40,18 @@ func scrapeJisho(search string) []vocabulary {
             {Type: classSelector, Val: "furigana"},
             {Type: tagSelector, Val: "span"},
         })
+
         for i, f := range furiganaElements {
             if (f.FirstChild != nil) {
-                furigana[i] = strings.TrimSpace(f.FirstChild.Data)
-            }
+				furigana[i] = strings.TrimSpace(f.FirstChild.Data)
+			}
         }
         
         characters := make([]character, len(writing))
         for i, w := range writing {
-            f := furigana[i]
             c := character{
                 Writing: string(w),
-                Reading: f, 
+                Reading: furigana[i], 
             }
             characters[i] = c
         }

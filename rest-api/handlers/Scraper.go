@@ -3,6 +3,7 @@ package handlers
 import (
 	"bytes"
 	"log"
+	"strings"
 
 	"golang.org/x/net/html"
 )
@@ -21,14 +22,16 @@ type selector struct{
 }
 
 func childText(n *html.Node, s []selector) string {
+	t := make([]rune, 0)
 	children := filter(n, s)
-	if children == nil {
-		return ""
-	}
-
-
-
-	for a := range children[0].
+	for _, c := range children {
+        for d := range c.Descendants() {
+            if (d.Type == html.TextNode) {
+               t = append(t, []rune(strings.TrimSpace(d.Data))...)
+            }
+        }
+    }
+    return string(t)
 }
 
 func filter(n *html.Node, s []selector) []*html.Node {
