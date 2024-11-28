@@ -1,9 +1,19 @@
 <script>
-    let pageTitle = 'Dictionary';
+    const {pageTitle} = $props();
 </script>
 
+<header>
+    <h1 class="page-title">{pageTitle}</h1>
+</header>
+
 <style>
-    .page-header {
+    *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    header {
         display: flex;
     }
 
@@ -14,7 +24,3 @@
         align-self: center;
     }
 </style>
-
-<header class="page-header">
-    <h1 class="page-title">{pageTitle}</h1>
-</header>

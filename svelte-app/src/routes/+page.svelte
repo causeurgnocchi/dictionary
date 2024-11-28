@@ -1,5 +1,7 @@
 <script>
     import Header from "../Header.svelte";
+    import SearchBar from "../SearchBar.svelte";
+    const pageTitle = 'Dictionary';
 </script>
 
 <style>
@@ -16,6 +18,12 @@
     }
 </style>
 
+<svelte:head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictionary</title>
+</svelte:head>
 <div class="container">
-    <Header />
+    <Header {pageTitle}/>
+    <SearchBar />
 </div>
