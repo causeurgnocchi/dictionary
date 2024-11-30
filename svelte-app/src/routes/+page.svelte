@@ -1,7 +1,6 @@
 <script>
     import Header from "../Header.svelte";
     import SearchBar from "../SearchBar.svelte";
-    const pageTitle = 'Dictionary';
 </script>
 
 <style>
@@ -24,6 +23,6 @@
     <title>Dictionary</title>
 </svelte:head>
 <div class="container">
-    <Header {pageTitle}/>
+    <Header pageTitle="Dictionary"/>
     <SearchBar />
 </div>

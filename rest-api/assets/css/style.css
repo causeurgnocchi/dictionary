@@ -65,7 +65,7 @@ body {
     flex-direction: column;
 }
 
-.staging-area .reading-writing {
+.staging-area .furigana-writing {
     align-self: center;
 }
 
@@ -73,35 +73,35 @@ body {
     text-align: center;
 }
 
-.reading-writing {
+.furigana-writing {
     display: grid;
     grid-template-rows: 18px 35px;
 }
 
-.reading {
+.furigana {
     display: flex;
     align-items: center;
 }
 
-.reading > span {
+.furigana > span {
     width: var(--kanji-size);
     text-align: center;
     max-height: 18px;
 }
 
-.reading-length-1 {
+.furigana-length-1 {
     font-size: calc(var(--kanji-size) / 2);
 }
 
-.reading-length-2 {
+.furigana-length-2 {
     font-size: calc(var(--kanji-size) / 2);
 }
 
-.reading-length-3 {
+.furigana-length-3 {
     font-size: calc(var(--kanji-size) / 3);
 }
 
-.reading-length-4 {
+.furigana-length-4 {
     font-size: calc(var(--kanji-size) / 4);
 }
 

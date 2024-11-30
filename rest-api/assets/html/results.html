@@ -2,10 +2,10 @@
 <div class="vocabularies">
     <div class="staging-area">
         {{with (index .Vocabularies 0)}}
-        <div class="reading-writing">
-            <p class="reading">
+        <div class="furigana-writing">
+            <p class="furigana">
                 {{range .Characters}}
-                    <span {{strlen .Reading | printf `class="reading-length-%d"` | attr}}>{{print .Reading}}</span>
+                    <span {{strlen .Furigana | printf `class="furigana-length-%d"` | attr}}>{{print .Furigana}}</span>
                 {{end}}
             </p>
             <p class="writing">
@@ -22,10 +22,10 @@
     </div>
     {{range (slice .Vocabularies 1)}}
     <div class="vocabulary">
-        <div class="reading-writing">
-            <p class="reading">
+        <div class="furigana-writing">
+            <p class="furigana">
                 {{range .Characters}}
-                    <span {{strlen .Reading | printf `class="reading-length-%d"` | attr}}>{{print .Reading}}</span>
+                    <span {{strlen .Furigana | printf `class="furigana-length-%d"` | attr}}>{{print .Furigana}}</span>
                 {{end}}
             </p>
             <p class="writing">

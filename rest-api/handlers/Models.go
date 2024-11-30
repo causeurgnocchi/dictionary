@@ -1,9 +1,12 @@
 package handlers
 
+import "encoding/json"
+
 type vocabulary struct {
     Characters []character
-    Meanings []string `selector:".concept_light-meanings.medium-9.columns .meaning-meaning:not(:has(*))"`
+    Meanings []string
 }
+
 func (v vocabulary) Writing() string {
     w := ""
     for _, c := range(v.Characters) {
@@ -11,15 +14,34 @@ func (v vocabulary) Writing() string {
     }
     return w
 }
+
 func (v vocabulary) Reading() string {
     r := ""
     for _, c := range(v.Characters) {
-        r += c.Reading
+		if (c.Furigana != "") {
+			r += c.Furigana;
+		} else {
+			r += c.Writing;
+		}
     }
     return r
 }
 
+func (v vocabulary) MarshalJSON() ([]byte, error) {
+	return json.Marshal(struct {
+		Characters []character `json:"characters"`
+		Meanings []string `json:"meanings"`
+		Writing string `json:"writing"`
+		Reading string `json:"reading"`
+	}{
+		Characters: v.Characters,
+		Meanings: v.Meanings,
+		Writing: v.Writing(),
+		Reading: v.Reading(),
+	})
+}
+
 type character struct {
-	Writing string
-	Reading string
+	Writing string `json:"writing"`
+	Furigana string `json:"furigana"`
 }

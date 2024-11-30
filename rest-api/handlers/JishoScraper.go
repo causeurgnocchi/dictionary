@@ -51,7 +51,7 @@ func scrapeJisho(search string) []vocabulary {
         for i, w := range writing {
             c := character{
                 Writing: string(w),
-                Reading: furigana[i], 
+                Furigana: furigana[i], 
             }
             characters[i] = c
         }
