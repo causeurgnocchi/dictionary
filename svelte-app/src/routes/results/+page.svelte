@@ -6,27 +6,23 @@
     import Header from '../../Header.svelte';
     import SearchBar from '../../SearchBar.svelte';
 
-    const search = $page.url.searchParams.get('search');
+    const search = $page.url.searchParams.get('search') || '';
     let vocabularies = $state([]);
-
-    onMount(async () => {
-        fetch(`http://[::1]:8080/api/vocabularies/${search}`)
-        .then(response => response.json())
-        .then(data => {
-            vocabularies = data;
-        })
-    });
 </script>
 
 <div class="container">
     <Header pageTitle="Dictionary"/>
-    <SearchBar />
-    <div class="vocabularies">
-        {#each vocabularies as vocabulary}
-            <StagingArea {vocabulary} />
-            <Vocabulary {vocabulary} />
-        {/each}
-    </div>
+    <SearchBar lastSearch={search}/>
+    {#if vocabularies.length > 0}
+        <div class="vocabularies">
+            <StagingArea vocabulary={vocabularies[0]} />
+            {#if vocabularies.length > 1}
+                {#each vocabularies.slice(1) as vocabulary}
+                    <Vocabulary {vocabulary} />
+                {/each}
+            {/if}
+        </div>
+    {/if}
 </div>
 
 <style>

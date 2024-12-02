@@ -1,9 +1,11 @@
-<script>
-    import magnifyingGlass from '/src/static/magnifying-glass.svg'; 
+<script lang="ts">
+    import magnifyingGlass from '/src/static/magnifying-glass.svg';
+
+    const {lastSearch} : {lastSearch: string} = $props();
 </script>
 
 <form action="/results">
-    <input type="text" name="search" id="search">
+    <input type="text" name="search" id="search" value={lastSearch}>
     <button type="submit" class="search">
         <img src={magnifyingGlass} alt="search">
     </button>
