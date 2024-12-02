@@ -1,23 +1,23 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
     import { page } from '$app/stores';
     import Vocabulary from '../../Vocabulary.svelte';
     import StagingArea from '../../StagingArea.svelte';
     import Header from '../../Header.svelte';
     import SearchBar from '../../SearchBar.svelte';
+    import type { PageData } from './$types';
 
     const search = $page.url.searchParams.get('search') || '';
-    let vocabularies = $state([]);
+    let { data }: { data : PageData } = $props();
 </script>
 
 <div class="container">
     <Header pageTitle="Dictionary"/>
     <SearchBar lastSearch={search}/>
-    {#if vocabularies.length > 0}
+    {#if data.vocabularies.length > 0}
         <div class="vocabularies">
-            <StagingArea vocabulary={vocabularies[0]} />
-            {#if vocabularies.length > 1}
-                {#each vocabularies.slice(1) as vocabulary}
+            <StagingArea vocabulary={data.vocabularies[0]} />
+            {#if data.vocabularies.length > 1}
+                {#each data.vocabularies.slice(1) as vocabulary}
                     <Vocabulary {vocabulary} />
                 {/each}
             {/if}

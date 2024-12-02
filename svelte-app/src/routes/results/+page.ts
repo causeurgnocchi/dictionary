@@ -1,10 +1,8 @@
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = ({ params }) => {
+export const load: PageLoad = async ({ url }) => {
   return {
-    post: {
-      vocabularies: fetch(`http://[::1]:8080/api/vocabularies/${params.}`)
+      vocabularies: await fetch(`http://[::1]:8080/api/vocabularies/${url.searchParams.get('search')}`)
       .then(response => response.json())
-    }
   }
 };
