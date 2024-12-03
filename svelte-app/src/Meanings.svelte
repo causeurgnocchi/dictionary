@@ -17,6 +17,5 @@
 
     .meanings {
         padding-inline-start: 30px;
-        padding-top: 15px;
     }
 </style>

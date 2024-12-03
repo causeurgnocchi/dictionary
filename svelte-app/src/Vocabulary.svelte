@@ -5,9 +5,11 @@
     const {vocabulary} : {vocabulary: Vocabulary} = $props();
 </script>
 
-<div>
+<div class="container">
     <FuriganaWriting {vocabulary} />
-    <Meanings meanings={vocabulary.meanings} />
+    <div class="meanings-wrapper">
+        <Meanings meanings={vocabulary.meanings} />
+    </div>
 </div>
 
 <style>
@@ -17,9 +19,13 @@
         padding: 0;
     }
 
-    div {
+    .container {
         border: 1px solid black;
         width: 500px;
         padding: 10px;
+    }
+
+    .meanings-wrapper {
+        margin-top: 15px;
     }
 </style>

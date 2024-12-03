@@ -34,6 +34,7 @@
         align-self: center;
         display: flex;
         flex-direction: column;
+        padding: 10px 0;
     }
 
     .furigana-writing {
@@ -42,5 +43,7 @@
 
     .chosen-meaning {
         text-align: center;
+        margin-top: 10px;
+        margin-bottom: 15px;
     }
 </style>

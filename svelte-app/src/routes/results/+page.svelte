@@ -8,17 +8,18 @@
 
     const search = $page.url.searchParams.get('search') || '';
     let { data }: { data : PageData } = $props();
-    let stagingArea = $state(data.vocabularies[0]);
+    let vocabularies = $state(data.vocabularies);
+    let chosenVocabulary = $state(vocabularies[0]);
 </script>
 
 <div class="container">
     <Header pageTitle="Dictionary"/>
     <SearchBar lastSearch={search}/>
-    {#if data.vocabularies.length > 0}
+    {#if vocabularies.length > 0}
         <div class="vocabularies">
-            <StagingArea vocabulary={stagingArea} />
-            {#if data.vocabularies.length > 1}
-                {#each data.vocabularies.splice(data.vocabularies.filter((v: Vocabulary) => v !== stagingArea.Vocabulary)) as vocabulary}
+            <StagingArea vocabulary={chosenVocabulary} />
+            {#if vocabularies.length > 1}
+                {#each vocabularies.filter((v: Vocabulary) => v !== chosenVocabulary) as vocabulary}
                     <Vocabulary {vocabulary} />
                 {/each}
             {/if}
