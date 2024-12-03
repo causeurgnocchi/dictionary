@@ -8,8 +8,9 @@
 
     const search = $page.url.searchParams.get('search') || '';
     let { data }: { data : PageData } = $props();
-    let vocabularies = $state(data.vocabularies);
-    let chosenVocabulary = $state(vocabularies[0]);
+    let vocabularies = $derived(data.vocabularies);
+    let chosenVocabulary = $derived(data.vocabularies[0]);
+    let remainingVocabularies = $derived(vocabularies.filter((v: Vocabulary) => v !== chosenVocabulary));
 </script>
 
 <div class="container">
@@ -18,8 +19,8 @@
     {#if vocabularies.length > 0}
         <div class="vocabularies">
             <StagingArea vocabulary={chosenVocabulary} />
-            {#if vocabularies.length > 1}
-                {#each vocabularies.filter((v: Vocabulary) => v !== chosenVocabulary) as vocabulary}
+            {#if remainingVocabularies.length > 0}
+                {#each remainingVocabularies as vocabulary}
                     <Vocabulary {vocabulary} />
                 {/each}
             {/if}
