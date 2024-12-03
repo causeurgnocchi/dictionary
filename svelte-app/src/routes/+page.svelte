@@ -24,5 +24,5 @@
 </svelte:head>
 <div class="container">
     <Header pageTitle="Dictionary"/>
-    <SearchBar />
+    <SearchBar lastSearch=""/>
 </div>

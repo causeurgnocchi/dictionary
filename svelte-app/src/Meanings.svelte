@@ -2,7 +2,7 @@
     const {meanings} : {meanings: string[]} = $props();
 </script>
 
-<ul class="meanings">
+<ul>
     {#each meanings as meaning}
     <li class="meaning">{meaning}</li>
     {/each}
@@ -15,7 +15,8 @@
         padding: 0;
     }
 
-    .meanings {
+    ul {
         padding-inline-start: 30px;
+        margin-top: var(--margin-top, 0);
     }
 </style>

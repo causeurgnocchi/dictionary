@@ -2,15 +2,13 @@
     import FuriganaWriting from "./FuriganaWriting.svelte";
     import Meanings from "./Meanings.svelte";
     
-    const {vocabulary} : {vocabulary: Vocabulary} = $props();
+    const {vocabulary, onclick} : {vocabulary: Vocabulary, onclick: () => void} = $props();
 </script>
 
-<div class="container">
+<button class="container" onclick={onclick}>
     <FuriganaWriting {vocabulary} />
-    <div class="meanings-wrapper">
-        <Meanings meanings={vocabulary.meanings} />
-    </div>
-</div>
+    <Meanings meanings={vocabulary.meanings} --margin-top="15px" />
+</button>
 
 <style>
     *, *::before, *::after {
@@ -23,9 +21,9 @@
         border: 1px solid black;
         width: 500px;
         padding: 10px;
-    }
-
-    .meanings-wrapper {
-        margin-top: 15px;
+        box-shadow: 5px 5px 5px rgb(128, 128, 128, 0.5);
+        text-align: start;
+        display: flex;
+        flex-direction: column;
     }
 </style>

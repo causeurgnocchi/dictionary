@@ -17,14 +17,14 @@
     <Header pageTitle="Dictionary"/>
     <SearchBar lastSearch={search}/>
     {#if vocabularies.length > 0}
-        <div class="vocabularies">
-            <StagingArea vocabulary={chosenVocabulary} />
-            {#if remainingVocabularies.length > 0}
+        <StagingArea vocabulary={chosenVocabulary} />
+        {#if remainingVocabularies.length > 0}
+            <div class="vocabularies">
                 {#each remainingVocabularies as vocabulary}
-                    <Vocabulary {vocabulary} />
+                    <Vocabulary {vocabulary} onclick={()=>{}} />
                 {/each}
-            {/if}
-        </div>
+            </div>
+        {/if}
     {/if}
 </div>
 
@@ -36,15 +36,15 @@
     }
 
     .container {
-        height: 100vh;
         display: grid;
         grid-template-rows: 50px 44px 1fr;
     }
 
     .vocabularies {
-        display: flex;
-        flex-direction: column;
-        row-gap: 20px;
-        padding: 0 20px 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, 500px);
+        justify-content: space-around;
+        row-gap: 30px;
+        padding: 20px;
     }
 </style>
