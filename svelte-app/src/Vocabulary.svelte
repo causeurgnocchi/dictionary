@@ -16,4 +16,10 @@
         margin: 0;
         padding: 0;
     }
+
+    div {
+        border: 1px solid black;
+        width: 500px;
+        padding: 10px;
+    }
 </style>
