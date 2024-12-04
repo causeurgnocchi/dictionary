@@ -13,6 +13,9 @@
         <p class="chosen-meaning">{vocabulary.meanings[0]}</p>
         {#if vocabulary.meanings.length > 1}
             <Meanings meanings={vocabulary.meanings.slice(1)} />
+            {#each vocabulary.meanings.slice(1) as meaning}
+                
+            {/each}
         {/if}
     </div>
 </div>

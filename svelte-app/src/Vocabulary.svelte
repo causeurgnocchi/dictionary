@@ -25,5 +25,10 @@
         text-align: start;
         display: flex;
         flex-direction: column;
+        font-family: 'Times New Roman';
+        font-size: 16px;
+        height: calc-size(auto);
+        transition: height 1s;
+        user-select: text;
     }
 </style>

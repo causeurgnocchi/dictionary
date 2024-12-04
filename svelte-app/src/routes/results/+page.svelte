@@ -8,20 +8,20 @@
 
     const search = $page.url.searchParams.get('search') || '';
     let { data }: { data : PageData } = $props();
-    let vocabularies = $derived(data.vocabularies);
-    let chosenVocabulary = $derived(data.vocabularies[0]);
-    let remainingVocabularies = $derived(vocabularies.filter((v: Vocabulary) => v !== chosenVocabulary));
+    let chosenVocabulary = $state.raw(data.vocabularies.length > 0 ? data.vocabularies[0] : []);
+    let remainingVocabulary = $derived(data.vocabularies.filter((v: Vocabulary) => v !== chosenVocabulary));
+    const vocabularyOnClick = (vocabulary: Vocabulary) => { chosenVocabulary = vocabulary; };
 </script>
 
 <div class="container">
     <Header pageTitle="Dictionary"/>
     <SearchBar lastSearch={search}/>
-    {#if vocabularies.length > 0}
+    {#if data.vocabularies.length > 0}
         <StagingArea vocabulary={chosenVocabulary} />
-        {#if remainingVocabularies.length > 0}
+        {#if remainingVocabulary.length > 0}
             <div class="vocabularies">
-                {#each remainingVocabularies as vocabulary}
-                    <Vocabulary {vocabulary} onclick={()=>{}} />
+                {#each remainingVocabulary as remaining}
+                    <Vocabulary vocabulary={remaining} onclick={()=>vocabularyOnClick(remaining)} />
                 {/each}
             </div>
         {/if}
@@ -41,10 +41,10 @@
     }
 
     .vocabularies {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, 500px);
-        justify-content: space-around;
+        display: flex;
+        flex-direction: column;
         row-gap: 30px;
         padding: 20px;
+        transition: 1s;
     }
 </style>
