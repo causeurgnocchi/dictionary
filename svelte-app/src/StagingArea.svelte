@@ -2,7 +2,7 @@
     import FuriganaWriting from "./FuriganaWriting.svelte";
     import Meanings from "./Meanings.svelte";
 
-    const {vocabulary} : {vocabulary: Vocabulary} = $props();
+    let {vocabulary} : {vocabulary: Vocabulary} = $props();
 </script>
 
 <div class="wrapper">
@@ -13,9 +13,6 @@
         <p class="chosen-meaning">{vocabulary.meanings[0]}</p>
         {#if vocabulary.meanings.length > 1}
             <Meanings meanings={vocabulary.meanings.slice(1)} />
-            {#each vocabulary.meanings.slice(1) as meaning}
-                
-            {/each}
         {/if}
     </div>
 </div>

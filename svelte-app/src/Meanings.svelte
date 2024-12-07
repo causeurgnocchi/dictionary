@@ -1,5 +1,5 @@
 <script lang="ts">
-    const {meanings} : {meanings: string[]} = $props();
+    let {meanings} : {meanings: string[]} = $props();
 </script>
 
 <ul>

@@ -2,7 +2,7 @@
     import FuriganaWriting from "./FuriganaWriting.svelte";
     import Meanings from "./Meanings.svelte";
     
-    const {vocabulary, onclick} : {vocabulary: Vocabulary, onclick: () => void} = $props();
+    let {vocabulary, onclick} : {vocabulary: Vocabulary, onclick: () => void} = $props();
 </script>
 
 <button class="container" onclick={onclick}>
@@ -27,8 +27,5 @@
         flex-direction: column;
         font-family: 'Times New Roman';
         font-size: 16px;
-        height: calc-size(auto);
-        transition: height 1s;
-        user-select: text;
     }
 </style>

@@ -1,5 +1,5 @@
 <script>
-    const {pageTitle} = $props();
+    let {pageTitle} = $props();
 </script>
 
 <header>

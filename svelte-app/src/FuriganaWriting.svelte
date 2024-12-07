@@ -1,11 +1,13 @@
 <script lang="ts">
-    const {vocabulary} : {vocabulary: Vocabulary} = $props();
-    const kanjiSize = 30;
-    const hasFurigana = vocabulary.characters.some((c: Character) => c.furigana !== '');
+    let {vocabulary} : {vocabulary: Vocabulary} = $props();
+    let kanjiSize = 30;
+    function hasFurigana() {
+        return vocabulary.characters.some((c: Character) =>  c.furigana !== '');
+    }
 </script>
 
-<div class={hasFurigana ? "has-furigana" : "not-has-furigana"} style:--kanji-size={`${kanjiSize}px`}>
-    {#if hasFurigana}
+<div class={hasFurigana() ? "has-furigana" : "not-has-furigana"} style:--kanji-size={`${kanjiSize}px`}>
+    {#if hasFurigana()}
         <p class="furigana">
             {#each vocabulary.characters as character}
                 <span style={`font-size: ${kanjiSize / (character.furigana.length === 1 ? 2 : character.furigana.length)}px`}>{character.furigana}</span>

@@ -1,11 +1,11 @@
 <script lang="ts">
     import magnifyingGlass from '/src/static/magnifying-glass.svg';
 
-    const {lastSearch} : {lastSearch: string} = $props();
+    let {onsubmit} = $props();
 </script>
 
-<form action="/results">
-    <input type="text" name="search" id="search" value={lastSearch}>
+<form action="/results" {onsubmit}>
+    <input type="text" name="search" id="search">
     <button type="submit" class="search">
         <img src={magnifyingGlass} alt="search">
     </button>
