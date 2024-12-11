@@ -9,7 +9,6 @@
     let chosenVocabulary = $state.raw(data.vocabularies.length > 0 ? data.vocabularies[0] : null);
     let stagingAreaVocabulary = $derived(chosenVocabulary || (data.vocabularies.length > 0 ? data.vocabularies[0] : null));
     let remainingVocabularies = $derived(data.vocabularies.filter((v: Vocabulary) => {
-        console.log(chosenVocabulary);
         return v !== chosenVocabulary;
     }));
 
