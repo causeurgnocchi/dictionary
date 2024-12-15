@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+      "target": "ES2023",
+      "lib": ["DOM", "ES2023", "DOM.Iterable"],
+      "outFile": "../assets/js/main.js"
+    },
+}

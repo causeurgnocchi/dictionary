@@ -1,0 +1,49 @@
+{{define "content"}}
+    <div class="chosen-vocabulary-wrapper">
+        <div class="vocabulary chosen-vocabulary">
+            {{with (index .Vocabularies 0)}}
+                <div {{if hasfurigana .}} {{printf `class="furigana-writing"` | attr}} {{else}} {{printf `class="furigana-writing no-furigana"` | attr}} {{end}}>
+                    {{if hasfurigana .}}
+                        <p class="furigana">
+                            {{range .Characters}}
+                                <span {{strlen .Furigana | printf `class="furigana-length-%d"` | attr}}>{{print .Furigana}}</span>
+                            {{end}}
+                        </p>
+                    {{end}}
+                    <p class="writing">
+                        {{.Writing}}
+                    </p>
+                </div>
+                <p class="meaning chosen-meaning">{{index .Meanings 0}}</p>
+                <ul class="meanings">
+                    {{range (slice .Meanings 1)}}
+                        <li class="meaning">{{.}}</li>
+                    {{end}}    
+                </ul>
+                {{end}}
+        </div>
+    </div>
+    {{range (slice .Vocabularies 1)}}
+    <div class="vocabularies">
+        <div class="vocabulary">
+            <div {{if hasfurigana .}} {{printf `class="furigana-writing"` | attr}} {{else}} {{printf `class="furigana-writing no-furigana"` | attr}} {{end}}>
+                {{if hasfurigana .}}
+                    <p class="furigana">
+                        {{range .Characters}}
+                            <span {{strlen .Furigana | printf `class="furigana-length-%d"` | attr}}>{{print .Furigana}}</span>
+                        {{end}}
+                    </p>
+                {{end}}
+                <p class="writing">
+                    {{.Writing}}
+                </p>
+            </div>
+            <ul class="meanings">
+                {{range .Meanings}}
+                    <li class="meaning">{{.}}</li>
+                {{end}}    
+            </ul>
+        </div>
+    </div>
+    {{end}}
+{{end}}

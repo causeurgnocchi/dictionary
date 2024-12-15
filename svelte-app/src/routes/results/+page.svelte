@@ -23,7 +23,7 @@
 
 <div class="container">
     <Header pageTitle="Dictionary"/>
-    <SearchBar {onsubmit}/>
+    <SearchBar />
     {#if data.vocabularies.length > 0}
         <StagingArea vocabulary={stagingAreaVocabulary} />
         {#if data.vocabularies.length > 1}
@@ -53,6 +53,5 @@
         flex-direction: column;
         row-gap: 30px;
         padding: 20px;
-        transition: 1s;
     }
 </style>

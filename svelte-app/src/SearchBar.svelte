@@ -1,10 +1,8 @@
 <script lang="ts">
     import magnifyingGlass from '/src/static/magnifying-glass.svg';
-
-    let {onsubmit} = $props();
 </script>
 
-<form action="/results" {onsubmit}>
+<form action="/results">
     <input type="text" name="search" id="search">
     <button type="submit" class="search">
         <img src={magnifyingGlass} alt="search">

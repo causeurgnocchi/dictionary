@@ -1,114 +1,114 @@
 interface Vocabulary {
-  furigana: Array<string>;
   writing: string;
+  furigana: Array<string>;
   meanings: Array<string>;
 }
 
 function Vocabulary(element: Element) : Vocabulary {
   return {
-    furigana: Array.from(element.querySelectorAll('.reading span')).map((characterReading) => characterReading.textContent || ''),
     writing: element.querySelector('.writing')?.textContent || '',
+    furigana: Array.from(element.querySelectorAll('.furigana span')).map((characterReading) => characterReading.textContent || ''),
     meanings: Array.from(element.querySelectorAll('.meaning')).map((meaning) => meaning.textContent || ''),
   }
 }
 
-function createStagingElement(vocabulary: Vocabulary, chosenMeaning: string) : HTMLDivElement {
-  const stagingElement = document.createElement('div');
-  stagingElement.classList.add('staging-area');
+function createChosenVocabularyElement(vocabulary: Vocabulary) : HTMLDivElement {
+  const element = document.createElement('div');
+  element.classList.add('vocabulary', 'chosen-vocabulary');
 
-  const readingWriting = document.createElement('div');
-  readingWriting.classList.add('reading-writing');
-  stagingElement.appendChild(readingWriting);
+  const furiganaWriting = document.createElement('div');
+  furiganaWriting.classList.add('furigana-writing');
+  element.appendChild(furiganaWriting);
 
-  const reading = document.createElement('p');
-  reading.classList.add('reading');
-  readingWriting.appendChild(reading);
+  const furigana = document.createElement('p');
+  furigana.classList.add('furigana');
+  furiganaWriting.appendChild(furigana);
   vocabulary.furigana.forEach((f) => {
     const characterReading = document.createElement('span');
-    characterReading.classList.add(`reading-length-${f.length}`);
+    characterReading.classList.add(`furigana-length-${f.length}`);
     characterReading.textContent = f;
-    reading.appendChild(characterReading);
+    furigana.appendChild(characterReading);
   });
   
   const writing = document.createElement('p');
   writing.classList.add('writing');
   writing.textContent = vocabulary.writing;
-  readingWriting.appendChild(writing);
+  furiganaWriting.appendChild(writing);
 
-  const chosenMeaningElement = document.createElement('p');
-  chosenMeaningElement.classList.add('meaning-chosen');
-  chosenMeaningElement.textContent = chosenMeaning;
-  stagingElement.appendChild(chosenMeaningElement);
+  if (vocabulary.meanings.length > 0) {
+    const chosenMeaningElement = document.createElement('p');
+    chosenMeaningElement.classList.add('chosen-meaning');
+    chosenMeaningElement.textContent = vocabulary.meanings[0];
+    element.appendChild(chosenMeaningElement);
+  }
 
-  const meanings = document.createElement('ul');
-  meanings.classList.add('meanings');
-  stagingElement.appendChild(meanings);
+  if (vocabulary.meanings.length > 1) {
+    const meanings = document.createElement('ul');
+    meanings.classList.add('meanings');
+    element.appendChild(meanings);
+  
+    vocabulary.meanings.slice(1).forEach((m) => {
+      const meaning = document.createElement('li');
+      meaning.classList.add('meaning');
+      meaning.textContent = m;
+      meanings.appendChild(meaning);
+    });
+  }
 
-  vocabulary.meanings.forEach((m) => {
-    const meaning = document.createElement('li');
-    meaning.classList.add('meaning');
-    meaning.textContent = m;
-    meanings.appendChild(meaning);
-  });
-
-  return stagingElement;
+  return element;
 }
 
-
-function createVocabularyElement(vocabulary: Vocabulary, isStagingArea: boolean) : HTMLDivElement {
+function createVocabularyElement(vocabulary: Vocabulary) : HTMLDivElement {
   const vocabularyElement = document.createElement('div');
-  vocabularyElement.classList.add(isStagingArea ? 'staging-area' : 'vocabulary');
+  vocabularyElement.classList.add('vocabulary');
 
-  const readingWriting = document.createElement('div');
-  readingWriting.classList.add('reading-writing');
-  vocabularyElement.appendChild(readingWriting);
+  const hasFurigana = vocabulary.writing !== vocabulary.furigana.join('');
 
-  const reading = document.createElement('p');
-  reading.classList.add('reading');
-  readingWriting.appendChild(reading);
+  const furiganaWriting = document.createElement('div');
+  furiganaWriting.classList.add(...(hasFurigana ? ['furigana-writing'] : ['furigana-writing', 'no-furigana']));
+  vocabularyElement.appendChild(furiganaWriting);
+
+  const furigana = document.createElement('p');
+  furigana.classList.add('reading');
+  furiganaWriting.appendChild(furigana);
   vocabulary.furigana.forEach((f) => {
     const characterReading = document.createElement('span');
     characterReading.classList.add(`reading-length-${f.length}`);
     characterReading.textContent = f;
-    reading.appendChild(characterReading);
+    furigana.appendChild(characterReading);
   });
   
   const writing = document.createElement('p');
   writing.classList.add('writing');
   writing.textContent = vocabulary.writing;
-  readingWriting.appendChild(writing);
+  furiganaWriting.appendChild(writing);
 
-  const meanings = document.createElement('ul');
-  meanings.classList.add('meanings');
-  vocabularyElement.appendChild(meanings);
-
-  vocabulary.meanings.forEach((m) => {
-    const meaning = document.createElement('li');
-    meaning.classList.add('meaning');
-    meaning.textContent = m;
-    meanings.appendChild(meaning);
-  });
+  if (vocabulary.meanings.length > 0) {
+    const meanings = document.createElement('ul');
+    meanings.classList.add('meanings');
+    vocabularyElement.appendChild(meanings);
+  
+    vocabulary.meanings.forEach((m) => {
+      const meaning = document.createElement('li');
+      meaning.classList.add('meaning');
+      meaning.textContent = m;
+      meanings.appendChild(meaning);
+    });
+  }
 
   return vocabularyElement;
 }
 
-let previousVocabulary = Vocabulary(document.querySelector('.staging-area')!);
-
-console.log(previousVocabulary);
+function getVocabulary(element: HTMLDivElement): Vocabulary {
+  return {
+    writing: element.querySelector('.writing').textContent,
+    furigana: [...element.querySelectorAll('.furigana span')].map((e) => e.textContent),
+    meanings: [...element.querySelectorAll('.chosen-meaning, .meaning')].map((e) => e.textContent)
+  }
+}
 
 document.querySelectorAll('.vocabulary').forEach((element) => {
-  element.addEventListener('click', (e) => {
-    const stagedElement = document.querySelector('.staging-area');
-    if (stagedElement === null) return;
-    
-    const meaning = e.target as Element;
-    if (!meaning.classList.contains('meaning')) return;
-    
-    const vocabulary = Vocabulary(element);
-    
-    stagedElement.replaceChildren(createVocabularyElement(vocabulary, true));
-    element.replaceChildren(createVocabularyElement(previousVocabulary, false));
-
-    previousVocabulary = vocabulary;
+  element.addEventListener('click', () => {
+    console.log(getVocabulary(element as HTMLDivElement));
   })
 });
