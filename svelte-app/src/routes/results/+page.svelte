@@ -1,35 +1,41 @@
 <script lang="ts">
-    import Vocabulary from '../../Vocabulary.svelte';
+    import VocabularyComponent from '../../Vocabulary.svelte';
     import StagingArea from '../../StagingArea.svelte';
     import Header from '../../Header.svelte';
     import SearchBar from '../../SearchBar.svelte';
+
     import type { PageData } from './$types';
+    import { flip } from 'svelte/animate';
+    import { fade } from 'svelte/transition';
+
+    type IndexedVocabulary = Vocabulary & { id: number; }; 
 
     let { data }: { data : PageData } = $props();
-    let chosenVocabulary = $state.raw(data.vocabularies.length > 0 ? data.vocabularies[0] : null);
-    let stagingAreaVocabulary = $derived(chosenVocabulary || (data.vocabularies.length > 0 ? data.vocabularies[0] : null));
-    let remainingVocabularies = $derived(data.vocabularies.filter((v: Vocabulary) => {
-        return v !== chosenVocabulary;
-    }));
-
-    function setChosenVocabulary(vocabulary: Vocabulary) {
-        chosenVocabulary = vocabulary;
-    }
+    let vocabularies = $derived(data.vocabularies.map((v: Vocabulary, i: number) => ({ id: i, ...v })));
+    let chosenVocabulary = $state.raw(data.vocabularies.length > 0 ? { id: 0, ...data.vocabularies[0] } : null);
+    let stagingAreaVocabulary = $derived(chosenVocabulary || (vocabularies.length > 0 ? vocabularies[0] : null));
+    let remainingVocabularies = $derived(vocabularies.filter((v: IndexedVocabulary) => v.id !== chosenVocabulary.id));
 
     $effect(() => {
-        chosenVocabulary = data.vocabularies.length > 0 ? data.vocabularies[0] : null;
-    });
+        chosenVocabulary = vocabularies.length > 0 ? vocabularies[0] : null;
+    })
 </script>
 
 <div class="container">
     <Header pageTitle="Dictionary"/>
     <SearchBar />
-    {#if data.vocabularies.length > 0}
-        <StagingArea vocabulary={stagingAreaVocabulary} />
-        {#if data.vocabularies.length > 1}
+    {#if vocabularies.length > 0}
+        {#each [stagingAreaVocabulary] as v (v)}
+            <div class="staging-area-wrapper" in:fade>
+                <StagingArea vocabulary={v} />
+            </div>
+        {/each}
+        {#if vocabularies.length > 1}
             <div class="vocabularies">
-                {#each remainingVocabularies as vocabulary}
-                    <Vocabulary {vocabulary} onclick={()=>setChosenVocabulary(vocabulary)} />
+                {#each remainingVocabularies as vocabulary (vocabulary.id)}
+                    <div class="vocabulary-wrapper" animate:flip>
+                        <VocabularyComponent {vocabulary} onclick={() => {chosenVocabulary = vocabulary}} />
+                    </div>
                 {/each}
             </div>
         {/if}
