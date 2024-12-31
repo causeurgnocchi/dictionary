@@ -1,13 +1,16 @@
 <script lang="ts">
     import FuriganaWriting from "./FuriganaWriting.svelte";
-    import Meanings from "./Meanings.svelte";
     
     let {vocabulary, onclick} : {vocabulary: Vocabulary, onclick: () => void} = $props();
 </script>
 
 <button class="container" onclick={onclick}>
     <FuriganaWriting {vocabulary} />
-    <Meanings meanings={vocabulary.meanings} --margin-top="15px" />
+    <ul class="meanings">
+        {#each vocabulary.meanings as meaning}
+            <li class="meaning">{meaning}</li>
+        {/each}
+    </ul>
 </button>
 
 <style>
@@ -27,5 +30,10 @@
         flex-direction: column;
         font-family: 'Times New Roman';
         font-size: 16px;
+    }
+
+    .meanings {
+        margin-top: 15px;
+        padding-inline-start: 30px;
     }
 </style>

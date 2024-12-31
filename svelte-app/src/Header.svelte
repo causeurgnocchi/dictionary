@@ -18,9 +18,9 @@
     }
 
     .page-title {
-        font-weight: normal;
-        font-size: 24px;
-        margin-left: 20px;
         align-self: center;
+        margin-left: 20px;
+        font-size: 24px;
+        font-weight: normal;
     }
 </style>

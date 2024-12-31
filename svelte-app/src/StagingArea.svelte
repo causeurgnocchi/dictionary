@@ -1,8 +1,8 @@
 <script lang="ts">
     import FuriganaWriting from "./FuriganaWriting.svelte";
-    import Meanings from "./Meanings.svelte";
 
     let {vocabulary} : {vocabulary: Vocabulary} = $props();
+    let chosenMeaning = $state.raw(vocabulary.meanings[0]);
 </script>
 
 <div class="wrapper">
@@ -10,9 +10,13 @@
         <div class="furigana-writing">
             <FuriganaWriting {vocabulary} />
         </div>
-        <p class="chosen-meaning">{vocabulary.meanings[0]}</p>
+        <p class="chosen-meaning">{chosenMeaning}</p>
         {#if vocabulary.meanings.length > 1}
-            <Meanings meanings={vocabulary.meanings.slice(1)} />
+            <div class="meanings">
+                {#each vocabulary.meanings.filter((meaning) => meaning !== chosenMeaning) as meaning}
+                    <button class="meaning" onclick={() => { chosenMeaning = meaning }}>{meaning}</button>
+                {/each}
+            </div>
         {/if}
     </div>
 </div>
@@ -31,10 +35,11 @@
     
     .staging-area {
         width: 350px;
-        align-self: center;
+        margin: 10px 0;
+        padding: 20px 0;
         display: flex;
         flex-direction: column;
-        padding: 10px 0;
+        align-self: center;
     }
 
     .furigana-writing {
@@ -44,6 +49,21 @@
     .chosen-meaning {
         text-align: center;
         margin-top: 10px;
-        margin-bottom: 15px;
+        margin-bottom: 25px;
+    }
+
+    .meanings {
+        margin-top: var(--margin-top, 0);
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        row-gap: 13px;
+    }
+
+    .meaning {
+        border: 1px black solid;
+        border-radius: 5px;
+        padding: 5px 10px;
+        text-align: center;
     }
 </style>

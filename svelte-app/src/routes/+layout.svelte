@@ -1,0 +1,18 @@
+<script lang="ts">
+    let { children } = $props();
+</script>
+
+<svelte:head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictionary</title>
+</svelte:head>
+{@render children()}
+
+<style>
+    :global(*, *::before, *::after) {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+</style>
