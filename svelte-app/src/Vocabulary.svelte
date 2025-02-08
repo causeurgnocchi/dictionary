@@ -30,6 +30,7 @@
         flex-direction: column;
         font-family: 'Times New Roman';
         font-size: 16px;
+        cursor: pointer;
     }
 
     .meanings {

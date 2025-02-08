@@ -1,6 +1,6 @@
-package handlers
+package models
 
-type character struct {
+type Character struct {
 	Writing  string `json:"writing"`
 	Furigana string `json:"furigana"`
 }

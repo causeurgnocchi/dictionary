@@ -6,13 +6,12 @@ create table vocabularies (
     id int auto_increment,
     writing text not null,
     reading text not null,
+    meaning text not null,
     primary key (id)
 );
 
-create table meanings (
+create table groups (
     id int auto_increment,
-    vocabulary_id int,
-    text text not null,
-    primary key (id),
-    foreign key (vocabulary_id) references vocabularies(id)
+    name text not null,
+    primary key (id)
 );

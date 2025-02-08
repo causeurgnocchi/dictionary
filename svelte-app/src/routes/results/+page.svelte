@@ -48,9 +48,12 @@
     }
 
     .vocabularies {
+        margin: 0 50px;
         padding: 35px 20px;
-        display: flex;
-        flex-direction: column;
-        row-gap: 30px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 500px);
+        justify-content: space-between;
+        row-gap: 50px;
+        column-gap: 200px;
     }
 </style>

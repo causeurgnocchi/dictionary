@@ -1,4 +1,4 @@
-package handlers
+package scraper
 
 import (
 	"log"
@@ -6,10 +6,12 @@ import (
 	"strings"
 
 	"golang.org/x/net/html"
+
+	"causeurgnocchi/dictionary/models"
 )
 
-func scrapeJisho(search string) []vocabulary {
-	url := "https://jisho.org/search/" + search
+func GetVocabulary(searchTerm string) []models.Vocabulary {
+	url := "https://jisho.org/search/" + searchTerm
 
 	resp, err := http.Get(url)
 	if err != nil {
@@ -22,20 +24,20 @@ func scrapeJisho(search string) []vocabulary {
 		log.Fatal(err)
 	}
 
-	vocabularies := make([]vocabulary, 0)
-	vocabularyElements := filter(*doc, []selector{
+	result := make([]models.Vocabulary, 0)
+	vocabularyElements := filter(*doc, []Selector{
 		{Type: idSelector, Val: "primary"},
 		{Type: classSelector, Val: "concept_light clearfix"},
 	})
 
 	for _, v := range vocabularyElements {
-		writing := []rune(childText(v, []selector{
+		writing := []rune(childText(v, []Selector{
 			{Type: classSelector, Val: "concept_light-representation"},
 			{Type: classSelector, Val: "text"},
 		}))
 
 		furigana := make([]string, len(writing))
-		furiganaElements := filter(v, []selector{
+		furiganaElements := filter(v, []Selector{
 			{Type: classSelector, Val: "concept_light-representation"},
 			{Type: classSelector, Val: "furigana"},
 			{Type: tagSelector, Val: "span"},
@@ -47,9 +49,9 @@ func scrapeJisho(search string) []vocabulary {
 			}
 		}
 
-		characters := make([]character, len(writing))
+		characters := make([]models.Character, len(writing))
 		for i, w := range writing {
-			c := character{
+			c := models.Character{
 				Writing:  string(w),
 				Furigana: furigana[i],
 			}
@@ -57,7 +59,7 @@ func scrapeJisho(search string) []vocabulary {
 		}
 
 		meanings := make([]string, 0)
-		meaningsElements := filter(v, []selector{
+		meaningsElements := filter(v, []Selector{
 			{Type: classSelector, Val: "concept_light-meanings medium-9 columns"},
 			{Type: classSelector, Val: "meaning-meaning"},
 		})
@@ -68,10 +70,10 @@ func scrapeJisho(search string) []vocabulary {
 			meanings = append(meanings, strings.TrimSpace(m.FirstChild.Data))
 		}
 
-		vocabularies = append(vocabularies, vocabulary{
+		result = append(result, models.Vocabulary{
 			Characters: characters,
 			Meanings:   meanings,
 		})
 	}
-	return vocabularies
+	return result
 }
