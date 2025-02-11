@@ -1,22 +1,16 @@
 <script lang="ts">
-    import magnifyingGlass from '/src/static/magnifying-glass.svg';
+    import searchIcon from '/src/static/search-icon.svg';
 </script>
 
-<form action="/results">
-    <input type="text" name="search" id="search">
-    <button type="submit" class="search">
-        <img src={magnifyingGlass} alt="search">
+<div>
+    <input type="text" />
+    <button type="submit">
+        <img src={searchIcon} alt="search icon">
     </button>
-</form>
+</div>
 
 <style>
-    *, *::before, *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-    
-    form {
+    div {
         display: grid;
         grid-template-rows: 24px;
         grid-template-columns: 200px 24px;

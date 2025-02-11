@@ -1,0 +1,28 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html class="page" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="/assets/js/search-box.js" defer></script>
+    <title>Dictionary</title>
+</head>
+<body class="page__body">
+    <header class="header">
+        <h1 class="header__title">
+            <a class="header__link" href="/">Dictionary</a>
+        </h1>
+    </header>
+    <main class="main">
+        <div class="main__search-box search-box">
+            <input class="search-box__input" type="text" />
+            <button class="search-box__submit">
+                <img class="search-box__icon" src="/assets/imgs/magnifying-glass.svg" alt="magnifying glass">
+            </button>
+        </div>
+        {{template "content" .}}
+    </main>
+</body>
+</html>
+{{end}}

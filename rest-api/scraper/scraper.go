@@ -2,7 +2,6 @@ package scraper
 
 import (
 	"strings"
-
 	"golang.org/x/net/html"
 )
 

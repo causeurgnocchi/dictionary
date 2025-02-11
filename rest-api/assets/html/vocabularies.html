@@ -1,0 +1,21 @@
+{{define "content"}}
+{{if (.| len | lt 0)}}
+{{with (0 | index .)}}
+<div class="main__chosen-entry chosen-entry">
+    <div class="chosen-entry__word word">
+        {{if (.Reading | ne .Writing)}}
+        <span class="word__reading">
+            {{range .Characters}}<span class="word__furigana" {{.Furigana | furiganasize}}>{{.Furigana}}</span>{{end}}
+        </span>
+        {{end}}
+        <span class="word__writing">{{.Writing}}</span>
+    </div>
+    <span class="chosen-entry__chosen-meaning">{{0 | index .Meanings}}</span>
+    <div class="chosen-entry__meanings">
+        {{range (1 | slice .Meanings)}}<button class="chosen-entry__meaning">{{.}}</button>{{end}}
+    </div>
+</div>
+{{end}}
+
+{{end}}
+{{end}}

@@ -16,7 +16,7 @@
 </script>
 
 <div class="upper-section">
-    <Header pageTitle="Dictionary"/>
+    <Header />
     <SearchBar />
     {#if vocabularies.length > 0}
         {#key stagingAreaVocabulary}
