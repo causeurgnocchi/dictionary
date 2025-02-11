@@ -1,87 +1,87 @@
 :root {
-    --kanji-size: 30px;
+  --kanji-size: 30px;
 }
 
 .page__body {
-    margin: 0;
+  margin: 0;
 }
 
 .header__title {
-    font-size: 24px;
-    padding: 0;
-    margin: 15px 0 0 50px;
+  font-size: 24px;
+  padding: 0;
+  margin: 15px 0 0 50px;
 }
 
 .header__link {
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: none;
-    color: black;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  color: black;
 }
 
 .main__search-box {
-    margin: 10px auto 0;
+  margin: 10px auto 0;
 }
 
 .main__chosen-entry {
-    min-width: 350px;
-    padding: 15px calc(50vw - 350px / 2) 30px;
-    box-shadow: 0 5px 5px rgb(128, 128, 128, 0.5);
+  min-width: 350px;
+  padding: 15px calc(50vw - 350px / 2) 30px;
+  box-shadow: 0 5px 5px rgb(128, 128, 128, 0.5);
 }
 
 .search-box {
-    display: grid;
-    width: 225px;
-    grid-template-rows: 25px;
-    grid-template-columns: 200px 25px;
-    border: 1px solid black;
+  display: grid;
+  width: 225px;
+  grid-template-rows: 25px;
+  grid-template-columns: 200px 25px;
+  border: 1px solid black;
 }
 
 .search-box__input {
-    border: none;
-    font-size: 15px;
+  border: none;
+  font-size: 15px;
 }
 
 .search-box__submit {
-    display: flex;
-    border: none;
-    border-left: 1px solid black;
-    padding: 0;
+  display: flex;
+  border: none;
+  border-left: 1px solid black;
+  padding: 0;
 }
 
 .search-box__icon {
-    background-color: white;
-    flex-grow: 1;
+  background-color: white;
+  flex-grow: 1;
 }
 
 .word {
-    width: fit-content;
-    font-size: var(--kanji-size);
-    line-height: 1em;
+  width: fit-content;
+  font-size: var(--kanji-size);
+  line-height: 1em;
 }
 
 .word__reading {
-    display: block;
+  display: block;
 }
 
 .word__furigana {
-    width: var(--kanji-size);
-    display: inline-block;
+  width: var(--kanji-size);
+  display: inline-block;
 }
 
 .chosen-entry__word {
-    margin: auto;
+  margin: auto;
 }
 
 .chosen-entry__chosen-meaning {
-    display: block;
-    width: fit-content;
-    margin: 10px auto 0;
+  display: block;
+  width: fit-content;
+  margin: 10px auto 0;
 }
 
 .chosen-entry__meanings {
-    display: flex;
-    flex-direction: column;
-    row-gap: 13px;
-    margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 13px;
+  margin-top: 30px;
 }

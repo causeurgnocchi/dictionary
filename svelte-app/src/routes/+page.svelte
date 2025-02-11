@@ -1,7 +1,7 @@
 <script lang="ts">
-    import Header from "../Header.svelte";
-    import SearchBar from "../SearchBar.svelte";
+  import Header from "../Header.svelte";
+  import SearchBox from "../SearchBox.svelte";
 </script>
 
 <Header />
-<SearchBar />
+<SearchBox --margin="auto" />
