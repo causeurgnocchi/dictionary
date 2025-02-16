@@ -1,8 +1,6 @@
 <script lang="ts">
   import VocabularyComponent from "../../Vocabulary.svelte";
   import StagingArea from "../../StagingArea.svelte";
-  import Header from "../../Header.svelte";
-  import SearchBox from "../../SearchBox.svelte";
   import type { PageData } from "./$types";
 
   type IndexedVocabulary = Vocabulary & { id: number };
@@ -22,8 +20,6 @@
 </script>
 
 <div class="upper-section">
-  <Header />
-  <SearchBox />
   {#if vocabularies.length > 0}
     {#key stagingAreaVocabulary}
       <div class="staging-area-wrapper">

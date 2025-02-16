@@ -1,8 +1,12 @@
+<script lang="ts">
+  import SearchIcon from '/src/static/search-icon.svg';
+  let search = $state('');
+</script>
+
 <div class="container">
-  <input class="input" type="text" /><button
-    class="search"
-    aria-label="search icon"
-  ></button>
+  <input class="input" type="text" bind:value={search} /><a class="search-link" href={`/vocabularies/${search}`}>
+    <img class="search" src={SearchIcon} alt="search icon" />
+  </a>
 </div>
 
 <style>
@@ -12,20 +16,25 @@
   }
 
   .input {
+    box-sizing: border-box;
     width: 200px;
     height: 25px;
     border: 1px solid black;
     vertical-align: top;
   }
 
-  .search {
+  .search-link {
+    display: inline-block;
     width: 25px;
     height: 25px;
-    border: 1px solid black;
+  }
+
+  .search {
+    box-sizing: border-box;
+    width: 25px;
+    height: 25px;
     position: relative;
     left: -1px;
-    background-image: url("src/static/search-icon.svg");
-    background-repeat: no-repeat;
-    background-position: center;
+    border: 1px solid black;
   }
 </style>

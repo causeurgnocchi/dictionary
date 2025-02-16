@@ -1,4 +1,7 @@
 <script lang="ts">
+    import Header from "../Header.svelte";
+    import SearchBox from "../SearchBox.svelte";
+
     let { children } = $props();
 </script>
 
@@ -7,12 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dictionary</title>
 </svelte:head>
-{@render children()}
+<Header />
+<SearchBox --margin="auto" />
 
-<style>
-    :global(*, *::before, *::after) {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-</style>
+{@render children()}
