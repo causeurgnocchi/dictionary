@@ -1,10 +1,13 @@
 <script lang="ts">
-  import SearchIcon from '/src/static/search-icon.svg';
-  let search = $state('');
+  import SearchIcon from "/src/static/search-icon.svg";
+  let search = $state("");
 </script>
 
 <div class="container">
-  <input class="input" type="text" bind:value={search} /><a class="search-link" href={`/vocabularies/${search}`}>
+  <input class="input" type="text" bind:value={search} /><a
+    class="search-link"
+    href={`/search/${search}`}
+  >
     <img class="search" src={SearchIcon} alt="search icon" />
   </a>
 </div>
